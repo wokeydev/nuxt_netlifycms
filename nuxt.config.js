@@ -40,7 +40,11 @@ module.exports = {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
+    '@nuxtjs/markdownit'
   ],
+  markdownit: {
+    injected: true,
+  },
   /*
   ** Build configuration
   */
@@ -50,5 +54,16 @@ module.exports = {
     */
     extend (config, ctx) {
     }
-  }
+  },
+  generate: {
+    routes: function() {
+      const fs = require('fs');
+      return fs.readdirSync('./assets/content/blog').map(file => {
+        return {
+          route: `/blog/${file.slice(2, -5)}`, // Remove the .json from the end of the filename
+          payload: require(`./assets/content/blog/${file}`),
+        };
+      });
+    },
+  },
 }
