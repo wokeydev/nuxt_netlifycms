@@ -1,9 +1,15 @@
+<template>
+  <article>
+      {{blogPosts}}
+  </article>
+</template>
+
 <script>
     export default {
-    computed: {
-        blogPosts() {
-        return this.$store.state.blogPosts;
+        computed: {
+            blogPosts() {
+                return this.$store.state.blogPosts;
+            },
         },
-    },
     };
 </script>
